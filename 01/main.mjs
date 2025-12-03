@@ -14,8 +14,7 @@ const partOneProcessor = (acc, step) => {
     return currentPosition;
 };
 
-const partTwoPropcessor = (acc, step) => {
-
+const partTwoProcessor = (acc, step) => {
     const amount = processStep(step);
     const restAmount = amount%100;
     const amountRotations = Math.floor(Math.abs(amount/100)); //full rotations on a single step
@@ -37,14 +36,24 @@ const partTwoPropcessor = (acc, step) => {
 
 let timesAt0 = 0;
 
+const parseData = (data) => {
+    // parse the data here
+    return data.split('\n');;
+};
+
+const solve = (data) => {
+    const parsedData = parseData(data);
+    //solve the puzzle here
+    const initialPosition = 50;
+    parsedData.reduce(partTwoProcessor, initialPosition);
+    return timesAt0;
+};
+
 const main = () => {
     const filename = process.argv[2];
     const data = fs.readFileSync(filename, { encoding: 'utf8', flag: 'r' });
-    const steps = data.split('\n');
-    const initialPosition = 50;
-    const finalPosition = steps.reduce(partTwoPropcessor, initialPosition);
-    console.log({timesAt0, finalPosition});
+    const answer = solve(data);
+    console.log({answer})
 }
-
 
 main();
