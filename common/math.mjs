@@ -1,0 +1,1 @@
+export const reduceSum = (acc, next) => acc + next;
